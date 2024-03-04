@@ -3,16 +3,33 @@ import { ref, onMounted, nextTick } from "vue";
 import echarts from "../../plugins/echarts";
 import { useDebounceFn } from "@vueuse/core";
 import dayjs from "dayjs";
-const meetingRoomChart = ref();
 
-const date = dayjs().format("YYYY/MM/DD");
+const meetingRoomChart = ref();
 
 const initMeetingRoomChart = () => {
   const barChart = echarts.init(meetingRoomChart.value);
 
   const color = "#3b54d3";
   const week = ["星期一", "星期二", "星期三", "星期四", "星期五"];
-
+  const data = [
+    "23:00",
+    "22:00",
+    "21:00",
+    "20:00",
+    "19:00",
+    "18:00",
+    "17:00",
+    "16:00",
+    "15:00",
+    "14:00",
+    "13:00",
+    "12:00",
+    "1:00",
+    "10:00",
+    "09:00",
+    "08:00",
+    "全天",
+  ];
   // echart配置
   barChart.setOption({
     tooltip: {
@@ -24,7 +41,6 @@ const initMeetingRoomChart = () => {
     grid: {
       top: "1%",
       containLabel: true,
-      borderColor: "#ccc",
       show: true,
     },
     xAxis: {
@@ -46,30 +62,17 @@ const initMeetingRoomChart = () => {
       },
     },
     yAxis: {
-      type: "time",
-      inverse: true,
-      minInterval: 3600 * 1000, // 两个地方都要设置以一小时为间隔，否则不会有效
-      maxInterval: 3600 * 1000, // 两个地方都要设置以一小时为间隔，否则不会有效
-      min: `${date} 08:00`, // 将data里最小时间的整点时间设为min,否则min会以data里面的min为开始进行整点递增
-      max: `${date} 23:00`, // 最大时间
+      type: "category",
+      data,
       axisLabel: {
-        formatter: function (value: number) {
-          var date = new Date(value);
-          return getzf(date.getHours()) + ":00";
-          function getzf(num: any) {
-            if (parseInt(num) < 10) {
-              num = "0" + num;
-            }
-            return num;
-          }
-        },
         showMaxLabel: true,
+        inside: true,
       },
       splitArea: {
         //网格区域
         show: true, //是否显示
         areaStyle: {
-          color: "#0a0819",
+          color: ["#0a0819"],
         },
       },
       splitLine: {
@@ -89,15 +92,15 @@ const initMeetingRoomChart = () => {
           var categoryIndex = api.value(0); // 这里使用 api.value(0) 取出当前 dataItem 中第一个维度的数值。
           var start = api.coord([categoryIndex, api.value(1)]); // 这里使用 api.coord(...) 将数值在当前坐标系中转换成为屏幕上的点的像素值。
           var end = api.coord([categoryIndex, api.value(2)]);
-          // var height = api.size([0, 1])[0];
+          var height = api.size([0, 1])[1];
           return {
             type: "rect", // 表示这个图形元素是矩形。
             shape: echarts.graphic.clipRectByRect(
               {
                 x: start[0],
-                y: start[1],
+                y: start[1] - height / 2,
                 width: 50,
-                height: end[1] - start[1],
+                height: end[1] - start[1] + height,
               },
               {
                 x: params.coordSys.x,
@@ -123,14 +126,10 @@ const initMeetingRoomChart = () => {
               show: true,
               position: "inside",
               formatter: function (params: any) {
-                return (
-                  params.value[1].split(" ")[1] +
-                  "~" +
-                  params.value[2].split(" ")[1]
-                );
+                return params.value[1] + "~" + params.value[2];
               },
             },
-            value: [1, `${date} 09:00`, `${date} 12:00`], //数据的值
+            value: [1, `09:00`, `12:00`], //数据的值
           },
           {
             name: "星期二",
@@ -141,33 +140,25 @@ const initMeetingRoomChart = () => {
               show: true,
               position: "inside",
               formatter: function (params: any) {
-                return (
-                  params.value[1].split(" ")[1] +
-                  "~" +
-                  params.value[2].split(" ")[1]
-                );
+                return params.value[1] + "~" + params.value[2];
               },
             },
-            value: [1, `${date} 17:00`, `${date} 20:00`],
+            value: [1, `17:00`, `20:00`],
           },
-          {
-            name: "星期四",
-            itemStyle: {
-              color,
-            },
-            label: {
-              show: true,
-              position: "inside",
-              formatter: function (params: any) {
-                return (
-                  params.value[1].split(" ")[1] +
-                  "~" +
-                  params.value[2].split(" ")[1]
-                );
-              },
-            },
-            value: [3, `${date} 21:00`, `${date} 23:00`],
-          },
+          // {
+          //   name: "星期四",
+          //   itemStyle: {
+          //     color,
+          //   },
+          //   label: {
+          //     show: true,
+          //     position: "inside",
+          //     formatter: function (params: any) {
+          //       return params.value[1] + "~" + params.value[2];
+          //     },
+          //   },
+          //   value: [3, `21:00`, `23:00`],
+          // },
         ],
       },
     ],
