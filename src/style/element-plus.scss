@@ -1,0 +1,84 @@
+@use "sass:color";
+@use 'variable.css';
+
+body {
+  .el-calendar-table .el-calendar-day {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+  }
+
+  .el-calendar__header {
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .el-calendar__body {
+    padding: 0;
+  }
+
+  .budge {
+    width: 8px;
+    height: 8px;
+    background: var(--color-blue);
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+
+  .el-calendar-table td.is-selected {
+    background-color: #f10f6a;
+    color: var(--color-white) !important;
+
+    .budge {
+      background-color: var(--color-white);
+    }
+  }
+
+  .el-calendar-table .el-calendar-day:hover {
+    background-color: lighten(#f10f6a, .5);
+    border-radius: 20px;
+  }
+
+  .el-calendar-table th {
+    color: var(--color-blue) !important;
+  }
+
+  .el-calendar-table td.current {
+    color: var(--color-grey);
+  }
+
+  .el-calendar-table td.prev,
+  .el-calendar-table td.next {
+    color: var(--border-color) !important;
+  }
+
+  .el-calendar-table td {
+    border-radius: 20px;
+  }
+
+
+  // table
+  .el-table__expanded-cell {
+    background-color: transparent !important;
+  }
+
+  .el-table th,
+  .el-table tr,
+  .el-table td {
+    background-color: transparent !important;
+  }
+
+  .el-table th {
+    color: var(--color-blue);
+  }
+
+  .el-table td.el-table__cell,
+  .el-table th.el-table__cell.is-leaf {
+    border: none;
+  }
+
+  .el-table__body-wrapper {
+    color: #7b8ba6;
+  }
+}

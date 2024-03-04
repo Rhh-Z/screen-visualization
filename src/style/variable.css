@@ -1,0 +1,12 @@
+@use "sass:color";
+
+:root {
+  font-size: 16px;
+  --color-black: #0a0819;
+  --color-white: #ffffff;
+  --el-fill-color-blank: --color-black !important;
+  /* --el-color-primary-light-9: #0a0819 !important; */
+  --color-grey: #626378;
+  --color-blue: #3b54d3;
+  --border-color: #232759;
+}
