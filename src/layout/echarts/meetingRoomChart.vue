@@ -2,7 +2,6 @@
 import { ref, onMounted, nextTick } from "vue";
 import echarts from "../../plugins/echarts";
 import { useDebounceFn } from "@vueuse/core";
-import dayjs from "dayjs";
 
 const meetingRoomChart = ref();
 
