@@ -14,6 +14,7 @@ import Close from '@/assets/svg/close.svg'
 import { CalendarDateType, CalendarInstance } from "element-plus";
 
 const date = dayjs().format("YYYY-MM-DD");
+const currentMonth = dayjs().get("month") + 1
 
 function getWeek() {
   const datas = dayjs().day();
@@ -126,8 +127,10 @@ onBeforeUnmount(() => {
 
         <div class="meetingRoom-usage">
           <div class="title">
+            <div class="triangle" />
             <h1>会议室使用情况</h1>
           </div>
+          
           <div class="chartContain">
             <MeetingRoomChart />
           </div>
@@ -149,6 +152,7 @@ onBeforeUnmount(() => {
                 <div class="calendar--content">
                   <ArrowLeft @click="selectDate('prev-month')"/>
                   <div class="date">{{ date }}</div>
+                  <div class="cureent-month" v-show="String(currentMonth) === date.split(' ')[2]">本月</div>
                   <ArrowRight  @click="selectDate('next-month')"/>
                 </div>
               </template>
