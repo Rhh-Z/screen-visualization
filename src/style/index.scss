@@ -27,20 +27,22 @@
     align-items: center;
     justify-content: center;
 
+
     .header-fake {
       position: absolute;
       width: 100%;
       height: 168px;
 
+
       &::before {
         content: "";
         position: absolute;
         bottom: 0;
-        right: 30.8%;
-        width: 22px;
+        right: 30.7%;
+        width: 1.4rem;
         height: 5px;
         background-color: #1989fa;
-        z-index: 100;
+        z-index: 10;
         border-radius: 10px;
       }
 
@@ -52,7 +54,7 @@
         width: 50px;
         height: 5px;
         background-color: #1989fa;
-        z-index: 100;
+        z-index: 20;
         transform: rotate(-76deg);
         border-radius: 10px;
       }
@@ -104,13 +106,12 @@
       content: "";
       position: absolute;
       bottom: 0;
-      left: 30.8%;
+      left: 30.7%;
       width: 22px;
       height: 5px;
       background-color: #1989fa;
-      z-index: 100;
-
-      border-radius: 10px;
+      z-index: 10;
+      border-radius: 6px;
     }
 
     &::after {
@@ -121,8 +122,8 @@
       width: 50px;
       height: 5px;
       background-color: #1989fa;
-      z-index: 100;
-      border-radius: 10px;
+      z-index: 20;
+      border-radius: 6px;
       transform: rotate(-280deg);
     }
 
@@ -163,7 +164,7 @@
         flex-direction: column;
         justify-content: space-between;
         width: 100%;
-        height: 30%;
+        height: 28%;
         border: 2px solid #191a3e;
         border-radius: 8px;
         margin-bottom: 1rem;
@@ -190,8 +191,9 @@
       }
 
       .meetingRoom-usage {
+        position: relative;
         width: 100%;
-        height: 56%;
+        height: 58%;
         border-radius: 8px;
         border: 2px solid #191a3e;
 
@@ -200,17 +202,61 @@
         }
 
 
+
         .title {
+          position: relative;
           display: flex;
           align-items: center;
-          border-bottom: 2px solid #171f4a;
-          padding: 10px 20px 10px 0;
-          margin: 0 20px;
+          padding: 10px 0px 8px 0px;
+          margin: 8px 20px;
+          z-index: 10;
+
+          .triangle {
+            position: absolute;
+            bottom: -25px;
+            left: 48.6%;
+            border-top: none;
+            border-top: 8px solid #054c96;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            z-index: 10;
+          }
+
+          h1 {
+            position: relative;
+            z-index: 10;
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #054c96;
+            clip-path: polygon(0% 0%, 100% 0, 100% 90%, 52% 90%, 50% 100%, 48% 90%, 0% 90%);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #0a0819;
+            border-top: 1px solid #0a0819;
+            border-left: 1px solid #0a0819;
+            clip-path: polygon(0% 0%, 100% 0, 100% 85%, 52% 85%, 50% 95%, 48% 85%, 0% 85%);
+            z-index: 1;
+          }
         }
 
         #roomChart {
           width: 100%;
-          height: 95%;
+          height: 100%;
         }
       }
     }
@@ -270,10 +316,16 @@
               width: 26px;
               height: 26px;
               cursor: pointer;
+              fill: #5e6074;
             }
 
             .date {
               margin: 0 2rem;
+            }
+
+            .cureent-month {
+              color: var(--color-grey);
+              margin-right: 10px;
             }
           }
         }

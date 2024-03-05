@@ -41,6 +41,8 @@ const initMeetingRoomChart = () => {
       top: "1%",
       containLabel: true,
       show: true,
+      borderColor: color,
+      z: 10,
     },
     xAxis: {
       type: "category",
@@ -76,6 +78,9 @@ const initMeetingRoomChart = () => {
       },
       splitLine: {
         show: true, //让网格显示
+        lineStyle: {
+          color: color,
+        },
       },
       axisTick: {
         show: false,
@@ -144,20 +149,20 @@ const initMeetingRoomChart = () => {
             },
             value: [1, `17:00`, `20:00`],
           },
-          // {
-          //   name: "星期四",
-          //   itemStyle: {
-          //     color,
-          //   },
-          //   label: {
-          //     show: true,
-          //     position: "inside",
-          //     formatter: function (params: any) {
-          //       return params.value[1] + "~" + params.value[2];
-          //     },
-          //   },
-          //   value: [3, `21:00`, `23:00`],
-          // },
+          {
+            name: "星期四",
+            itemStyle: {
+              color,
+            },
+            label: {
+              show: true,
+              position: "inside",
+              formatter: function (params: any) {
+                return params.value[1] + "~" + params.value[2];
+              },
+            },
+            value: [3, `全天`, `全天`],
+          },
         ],
       },
     ],

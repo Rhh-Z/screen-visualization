@@ -171,5 +171,3 @@ onMounted(() => {
 <template>
   <div ref="attendancePie" id="pieChar" />
 </template>
-
-<style lang="scss" scoped></style>
